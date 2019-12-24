@@ -37,12 +37,18 @@ class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerContro
                 NSLog("In imagePickerController getTokenCompletionHandler postDataCompletionHandler got responseDictionary:\n\(responseDictionary!)")
                 guard let responseDictionary = responseDictionary else { return }
                 guard let predictResult = responseDictionary["predicted_label"] else { return }
-                self.name = predictResult as! String
                 let scores = responseDictionary["scores"] as! Array<Array<Any>>
                 let scoreString = scores[0][1] as! String
                 let scoreDouble = Double(scoreString)!
                 let resultScore = scoreDouble * 100.0
                 self.confidence = "Confidence: " + String(format: "%.1f", resultScore) + "%"
+                
+                let confidenceThreshold = 20.0
+                if resultScore >= confidenceThreshold {
+                    self.name = predictResult as! String
+                } else {
+                    self.name = "Prediction unreliable"
+                }
             })
             NSLog("In imagePickerController getTokenCompletionHandler successfully posted image to server")
         })

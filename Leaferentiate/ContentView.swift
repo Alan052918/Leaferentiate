@@ -9,12 +9,12 @@
 import SwiftUI
 
 struct ContentView: View {
-  
-    @State private var name: String = "Leaferentiate"
-    @State private var confidence: String = ""
-    @State private var image: Image? = Image("appface")
+
     @State private var showPhotoLibraryView: Bool = false
     @State private var showCameraView: Bool = false
+    @State private var image: Image? = Image("appface")
+    @State private var name: String = "Leaferentiate"
+    @State private var confidence: String = ""
   
     var body: some View {
         ZStack {
@@ -22,6 +22,7 @@ struct ContentView: View {
                 Spacer()
                 
                 Text(name)
+                    .multilineTextAlignment(.center)
                     .font(.largeTitle)
                 
                 Text(confidence)
@@ -70,7 +71,7 @@ struct ContentView: View {
             }
 
             if (showCameraView) {
-                CameraView(isShown: $showCameraView, image: $image, name: self.$name, confidence: self.$confidence)
+                CameraView(isShown: self.$showCameraView, image: self.$image, name: self.$name, confidence: self.$confidence)
                     .statusBar(hidden: true)
             }
         }
