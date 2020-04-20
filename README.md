@@ -4,7 +4,7 @@
 
 An iOS app for SUSTech CS303 Artificial Intelligence using ModelArts to identify leaves.
 
-Thanks to Chang Cao for providing ModelArts support, Tianye Shu for assistance, and Sicong Yao for providing the name "Leaferentiate".
+Thanks to 曹畅 for providing ModelArts support, 舒天野 for assistance, and 姚斯聪 for providing the name "Leaferentiate".
 
 ## April 2020 Update
 
