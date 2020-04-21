@@ -1,10 +1,23 @@
 # Leaferentiate
 
-**This app is no longer maintained since the ModelArts model is expired**
+**#This app is no longer maintained since the ModelArts model is expired#**
 
 An iOS app for SUSTech CS303 Artificial Intelligence using ModelArts to identify leaves.
 
-Thanks to 曹畅 for providing ModelArts support, 舒天野 for assistance, and 姚斯聪 for providing the name "Leaferentiate".
+Thanks to 曹畅 for providing ModelArts support, 舒天野 for providing leaf datasets, and 姚斯聪 for providing the name "Leaferentiate".
+
+## Overview
+
+Two image sources:
+
+- Identify leaf pictures captured by iPhone camera
+- Identify leaf pictures in iPhone Photos app: [demo video](Photo-library-upload-demo.mp4)
+
+The identified picture and predicted result will be displayed on the app's home view
+
+- Result
+  - Leaf name
+  - Confidence: possibility of the leaf name matching the picture in percentage
 
 ## April 2020 Update
 
