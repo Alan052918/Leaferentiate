@@ -210,7 +210,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1120;
-				LastUpgradeCheck = 1120;
+				LastUpgradeCheck = 1330;
 				ORGANIZATIONNAME = "Alan Ai";
 				TargetAttributes = {
 					F9DF820B23A796E300E80A38 = {
@@ -356,6 +356,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -416,6 +417,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -451,7 +453,7 @@
 				CODE_SIGN_ENTITLEMENTS = Leaferentiate/Leaferentiate.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Leaferentiate/Preview Content\"";
-				DEVELOPMENT_TEAM = HA5W848Q8D;
+				DEVELOPMENT_TEAM = FTZ5GSJXFQ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Leaferentiate/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -472,7 +474,7 @@
 				CODE_SIGN_ENTITLEMENTS = Leaferentiate/Leaferentiate.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Leaferentiate/Preview Content\"";
-				DEVELOPMENT_TEAM = HA5W848Q8D;
+				DEVELOPMENT_TEAM = FTZ5GSJXFQ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Leaferentiate/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -492,7 +494,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HA5W848Q8D;
+				DEVELOPMENT_TEAM = FTZ5GSJXFQ;
 				INFOPLIST_FILE = LeaferentiateTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -514,7 +516,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HA5W848Q8D;
+				DEVELOPMENT_TEAM = FTZ5GSJXFQ;
 				INFOPLIST_FILE = LeaferentiateTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -535,7 +537,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HA5W848Q8D;
+				DEVELOPMENT_TEAM = FTZ5GSJXFQ;
 				INFOPLIST_FILE = LeaferentiateUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -555,7 +557,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HA5W848Q8D;
+				DEVELOPMENT_TEAM = FTZ5GSJXFQ;
 				INFOPLIST_FILE = LeaferentiateUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -580,7 +582,7 @@
 				F9DF823523A796EB00E80A38 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		F9DF823623A796EB00E80A38 /* Build configuration list for PBXNativeTarget "Leaferentiate" */ = {
 			isa = XCConfigurationList;
@@ -589,7 +591,7 @@
 				F9DF823823A796EB00E80A38 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		F9DF823923A796EB00E80A38 /* Build configuration list for PBXNativeTarget "LeaferentiateTests" */ = {
 			isa = XCConfigurationList;
@@ -598,7 +600,7 @@
 				F9DF823B23A796EB00E80A38 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		F9DF823C23A796EB00E80A38 /* Build configuration list for PBXNativeTarget "LeaferentiateUITests" */ = {
 			isa = XCConfigurationList;
@@ -607,7 +609,7 @@
 				F9DF823E23A796EB00E80A38 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
