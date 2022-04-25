@@ -22,6 +22,7 @@ Coordinator
 - [x] Connect to Plant.id plant identification API.
 - [x] Optimize result information display
 - [x] Concurrent API calls
+- [x] Show ProgressView when waiting for results to come back
 
 ## About
 
