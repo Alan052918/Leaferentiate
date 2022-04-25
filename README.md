@@ -6,7 +6,7 @@ Views
 
 - ContentView: main display
 - PhotoLibraryView: presents a sheet on top of main display for selecting from the iOS photos library
-- CameraView: replaces the main display with the camera view
+- CameraView: replaces the main display with the camera view for capturing from camera
 
 Coordinator
 
@@ -22,6 +22,7 @@ Coordinator
 - [x] Connect to Plant.id plant identification API.
 - [x] Optimize result information display
 - [x] Concurrent API calls
+- [x] Show ProgressView when waiting for results to come back
 
 ## About
 
