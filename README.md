@@ -21,6 +21,7 @@ Coordinator
 - [ ] Add UI tests.
 - [x] Connect to Plant.id plant identification API.
 - [x] Optimize result information display
+- [x] Concurrent API calls
 
 ## About
 
