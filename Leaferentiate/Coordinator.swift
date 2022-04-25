@@ -34,37 +34,39 @@ class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerContro
         }
         NSLog("In imagePickerController unwrappedImage obtained")
         
-        self.postData(image: unwrappedImage, postDataCompletionHandler: { jsonData, error in
-            // Post request to server to upload image and get prediction result
-            guard let jsonData = jsonData else {
-                NSLog("Fail to unwrap jsonData")
-                return
-            }
-            print("In imagePickerController postDataCompletionHandler got responseDictionary:\n\(jsonData)")
-            
-            let suggestions = jsonData["suggestions"] as! [[String: AnyObject]]
-            
-            let plantName = suggestions[0]["plant_name"] as! String
-            NSLog("In imagePickerController postDataCompletionHandler got plantName: \(plantName)")
-            
-            let plantDetails = suggestions[0]["plant_details"] as! [String: AnyObject]
-            
-            let commonName = (plantDetails["common_names"] as! [String])[0]
-            NSLog("In imagePickerController postDataCompletionHandler got commonName: \(commonName)")
-            
-            let probability = suggestions[0]["probability"] as! Double
-            NSLog("In imagePickerController postDataCompletionHandler got probability: \(probability)")
-            
-            self.probability = "Confidence: " + String(format: "%.1f", probability * 100.0) + "%"
-            
-            let confidenceThreshold = 0.20
-            if probability >= confidenceThreshold {
-                self.plantName = "\"\(plantName)\""
-                self.commonName = commonName
-            } else {
-                self.commonName = "Prediction unreliable"
-            }
-        })
+        Task {
+            await self.postData(image: unwrappedImage, postDataCompletionHandler: { jsonData, error in
+                // Post request to server to upload image and get prediction result
+                guard let jsonData = jsonData else {
+                    NSLog("Fail to unwrap jsonData")
+                    return
+                }
+                print("In imagePickerController postDataCompletionHandler got responseDictionary:\n\(jsonData)")
+                
+                let suggestions = jsonData["suggestions"] as! [[String: AnyObject]]
+                
+                let plantName = suggestions[0]["plant_name"] as! String
+                NSLog("In imagePickerController postDataCompletionHandler got plantName: \(plantName)")
+                
+                let plantDetails = suggestions[0]["plant_details"] as! [String: AnyObject]
+                
+                let commonName = (plantDetails["common_names"] as! [String])[0]
+                NSLog("In imagePickerController postDataCompletionHandler got commonName: \(commonName)")
+                
+                let probability = suggestions[0]["probability"] as! Double
+                NSLog("In imagePickerController postDataCompletionHandler got probability: \(probability)")
+                
+                self.probability = "Confidence: " + String(format: "%.1f", probability * 100.0) + "%"
+                
+                let confidenceThreshold = 0.20
+                if probability >= confidenceThreshold {
+                    self.plantName = "\"\(plantName)\""
+                    self.commonName = commonName
+                } else {
+                    self.commonName = "Prediction unreliable"
+                }
+            })
+        }
         imageInCoordinator = Image(uiImage: unwrappedImage)
         isCoordinatorShown = false
     }
@@ -86,7 +88,7 @@ class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerContro
         return json
     }
     
-    func postData(image: UIImage, postDataCompletionHandler: @escaping ([String: AnyObject]?, Error?) -> Void) {
+    func postData(image: UIImage, postDataCompletionHandler: @escaping ([String: AnyObject]?, Error?) -> Void) async {
         guard let imageData = image.jpegData(compressionQuality: 1.0) else {
             NSLog("Invalid image data")
             return
@@ -110,31 +112,19 @@ class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerContro
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try! JSONSerialization.data(withJSONObject: parameters)
         
-//        do {
-//            let (data, response) = try await URLSession.shared.data(for: request)
-//            let dataString = String(data: data, encoding: .utf8)
-//            if let decodeResponse = self.getDictionaryFromJSONString(jsonString: dataString) {
-//                re
-//            }
-//        } catch {
-//            NSLog("In postData something went wrong")
-//        }
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                NSLog("In postData ERROR: \(error)")
-            } else {
-                if let response = response as? HTTPURLResponse {
-                    NSLog("In postData response statusCode: \(response.statusCode)")
-                    NSLog("In postData response allHeaderfields:\n\(response.allHeaderFields)")
-                }
-                if let data = data, let jsonString = String(data: data, encoding: .utf8) {
-                    let jsonData = self.deserializeData(from: jsonString)
-                    postDataCompletionHandler(jsonData, nil)
-                    print("In postData got responseDictionary:\n\(jsonData)")
-                }
+        do {
+            let (data, response) = try await URLSession.shared.data(for: request)
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                NSLog("Fail to unwrap HTTP URL response")
+                return
             }
+            let jsonString = String(data: data, encoding: .utf8)!
+            let json = self.deserializeData(from: jsonString)
+            print("In postData got response JSON object:\n\(json)")
+            postDataCompletionHandler(json, nil)
+        } catch {
+            NSLog("Fail to complete URL session")
+            return
         }
-        task.resume()
     }
 }
