@@ -13,13 +13,15 @@ class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerContro
     
     @Binding var isCoordinatorShown: Bool
     @Binding var imageInCoordinator: Image?
+    @Binding var showProgress: Bool
     @Binding var commonName: String
     @Binding var plantName: String
     @Binding var probability: String
     
-    init(isShown: Binding<Bool>, image: Binding<Image?>, commonName: Binding<String>, plantName: Binding<String>, probability: Binding<String>) {
+    init(isShown: Binding<Bool>, image: Binding<Image?>, showProgress: Binding<Bool>, commonName: Binding<String>, plantName: Binding<String>, probability: Binding<String>) {
         _isCoordinatorShown = isShown
         _imageInCoordinator = image
+        _showProgress = showProgress
         _commonName = commonName
         _plantName = plantName
         _probability = probability
@@ -65,14 +67,17 @@ class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerContro
                 } else {
                     self.commonName = "Prediction unreliable"
                 }
+                self.showProgress = false
             })
         }
         imageInCoordinator = Image(uiImage: unwrappedImage)
         isCoordinatorShown = false
+        showProgress = true
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         isCoordinatorShown = false
+        showProgress = false
     }
 
     func deserializeData(from jsonString: String) -> [String: AnyObject] {

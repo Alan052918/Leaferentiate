@@ -9,18 +9,24 @@
 import SwiftUI
 
 struct ContentView: View {
-
-    @State private var showPhotoLibraryView: Bool = false
-    @State private var showCameraView: Bool = false
+    
     @State private var image: Image? = Image("appface")
     @State private var commonName: String = "Leaferentiate"
     @State private var plantName: String = ""
     @State private var probability: String = ""
+
+    @State private var showPhotoLibraryView: Bool = false
+    @State private var showCameraView: Bool = false
+    @State private var showProgressView: Bool = false
   
     var body: some View {
         ZStack {
             VStack {
                 Spacer()
+                
+                if (showProgressView) {
+                    ProgressView()
+                }
                 
                 Text(plantName)
                     .font(.caption)
@@ -66,11 +72,11 @@ struct ContentView: View {
             }
             .padding()
             .sheet(isPresented: $showPhotoLibraryView) {
-                PhotoLibraryView(isShown: $showPhotoLibraryView, image: $image, commonName: $commonName, plantName: $plantName, probability: $probability)
+                PhotoLibraryView(isShown: $showPhotoLibraryView, image: $image, showProgress: $showProgressView, commonName: $commonName, plantName: $plantName, probability: $probability)
             }
 
             if (showCameraView) {
-                CameraView(isShown: $showCameraView, image: $image, commonName: $commonName, plantName: $plantName, probability: $probability)
+                CameraView(isShown: $showCameraView, image: $image, showProgress: $showProgressView, commonName: $commonName, plantName: $plantName, probability: $probability)
                     .statusBar(hidden: true)
             }
         }

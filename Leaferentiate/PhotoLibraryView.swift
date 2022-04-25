@@ -13,13 +13,14 @@ struct PhotoLibraryView {
     /// MARK: - Properties
     @Binding var isShown: Bool
     @Binding var image: Image?
+    @Binding var showProgress: Bool
     @Binding var commonName: String
     @Binding var plantName: String
     @Binding var probability: String
   
     func makeCoordinator() -> Coordinator {
         NSLog("PhotoLibraryView makeCoordinator invoked")
-        return Coordinator(isShown: $isShown, image: $image, commonName: $commonName, plantName: $plantName, probability: $probability)
+        return Coordinator(isShown: $isShown, image: $image, showProgress: $showProgress, commonName: $commonName, plantName: $plantName, probability: $probability)
     }
 }
 
