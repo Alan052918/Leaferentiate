@@ -12,13 +12,15 @@ Coordinator
 
 - Handles selected images, communicates with Plant.id API, and updates main display with identification results
 
+![Views](docs/images/Views.jpg)
+
 ## TODO
 
-- [ ] Optimize result information display
 - [ ] Add animation to update identification result.
 - [ ] Add Unit tests.
 - [ ] Add UI tests.
 - [x] Connect to Plant.id plant identification API.
+- [x] Optimize result information display
 
 ## About
 

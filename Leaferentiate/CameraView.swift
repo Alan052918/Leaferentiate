@@ -13,12 +13,13 @@ struct CameraView {
     /// MARK: - Properties
     @Binding var isShown: Bool
     @Binding var image: Image?
-    @Binding var name: String
-    @Binding var confidence: String
+    @Binding var commonName: String
+    @Binding var plantName: String
+    @Binding var probability: String
     
     func makeCoordinator() -> Coordinator {
         NSLog("CameraView makeCoordinator invoked")
-        return Coordinator(isShown: $isShown, image: $image, name: $name, confidence: $confidence)
+        return Coordinator(isShown: $isShown, image: $image, commonName: $commonName, plantName: $plantName, probability: $probability)
     }
 }
 

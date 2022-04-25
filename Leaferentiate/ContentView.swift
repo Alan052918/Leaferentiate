@@ -13,19 +13,22 @@ struct ContentView: View {
     @State private var showPhotoLibraryView: Bool = false
     @State private var showCameraView: Bool = false
     @State private var image: Image? = Image("appface")
-    @State private var name: String = "Leaferentiate"
-    @State private var confidence: String = ""
+    @State private var commonName: String = "Leaferentiate"
+    @State private var plantName: String = ""
+    @State private var probability: String = ""
   
     var body: some View {
         ZStack {
             VStack {
                 Spacer()
                 
-                Text(name)
-                    .multilineTextAlignment(.center)
+                Text(plantName)
+                    .font(.caption)
+                
+                Text(commonName)
                     .font(.largeTitle)
                 
-                Text(confidence)
+                Text(probability)
                     .italic()
 
                 image?
@@ -63,11 +66,11 @@ struct ContentView: View {
             }
             .padding()
             .sheet(isPresented: $showPhotoLibraryView) {
-                PhotoLibraryView(isShown: self.$showPhotoLibraryView, image: self.$image, name: self.$name, confidence: self.$confidence)
+                PhotoLibraryView(isShown: $showPhotoLibraryView, image: $image, commonName: $commonName, plantName: $plantName, probability: $probability)
             }
 
             if (showCameraView) {
-                CameraView(isShown: self.$showCameraView, image: self.$image, name: self.$name, confidence: self.$confidence)
+                CameraView(isShown: $showCameraView, image: $image, commonName: $commonName, plantName: $plantName, probability: $probability)
                     .statusBar(hidden: true)
             }
         }

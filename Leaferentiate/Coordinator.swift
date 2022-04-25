@@ -13,14 +13,16 @@ class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerContro
     
     @Binding var isCoordinatorShown: Bool
     @Binding var imageInCoordinator: Image?
-    @Binding var name: String
-    @Binding var confidence: String
+    @Binding var commonName: String
+    @Binding var plantName: String
+    @Binding var probability: String
     
-    init(isShown: Binding<Bool>, image: Binding<Image?>, name: Binding<String>, confidence: Binding<String>) {
+    init(isShown: Binding<Bool>, image: Binding<Image?>, commonName: Binding<String>, plantName: Binding<String>, probability: Binding<String>) {
         _isCoordinatorShown = isShown
         _imageInCoordinator = image
-        _name = name
-        _confidence = confidence
+        _commonName = commonName
+        _plantName = plantName
+        _probability = probability
         NSLog("Coordinator instantiated")
     }
     
@@ -42,19 +44,25 @@ class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerContro
             
             let suggestions = jsonData["suggestions"] as! [[String: AnyObject]]
             
-            let plantName = suggestions[0]["plant_name"]!
-            print("In imagePickerController postDataCompletionHandler got plantName: \(plantName)")
+            let plantName = suggestions[0]["plant_name"] as! String
+            NSLog("In imagePickerController postDataCompletionHandler got plantName: \(plantName)")
+            
+            let plantDetails = suggestions[0]["plant_details"] as! [String: AnyObject]
+            
+            let commonName = (plantDetails["common_names"] as! [String])[0]
+            NSLog("In imagePickerController postDataCompletionHandler got commonName: \(commonName)")
             
             let probability = suggestions[0]["probability"] as! Double
-            print("In imagePickerController postDataCompletionHandler got probability: \(probability)")
+            NSLog("In imagePickerController postDataCompletionHandler got probability: \(probability)")
             
-            self.confidence = "Confidence: " + String(format: "%.1f", probability * 100.0) + "%"
+            self.probability = "Confidence: " + String(format: "%.1f", probability * 100.0) + "%"
             
             let confidenceThreshold = 0.20
             if probability >= confidenceThreshold {
-                self.name = plantName as! String
+                self.plantName = "\"\(plantName)\""
+                self.commonName = commonName
             } else {
-                self.name = "Prediction unreliable"
+                self.commonName = "Prediction unreliable"
             }
         })
         imageInCoordinator = Image(uiImage: unwrappedImage)
@@ -92,18 +100,7 @@ class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerContro
             "modifiers": ["crops_fast", "similar_images", "health_all", "disease_similar_images"],
             "plant_language": "en",
             // plant details docs: https://github.com/flowerchecker/Plant-id-API/wiki/Plant-details
-            "plant_details": ["common_names",
-                              "edible_parts",
-                              "gbif_id",
-                              "name_authority",
-                              "propagation_methods",
-                              "synonyms",
-                              "taxonomy",
-                              "url",
-                              "wiki_description",
-                              "wiki_image"],
-//            // disease details docs: https://github.com/flowerchecker/Plant-id-API/wiki/Disease-details
-//            "disease_details": ["common_names", "url", "description"]
+            "plant_details": ["common_names"]
         ]
         
         let url = URL(string: "https://api.plant.id/v2/identify")!
