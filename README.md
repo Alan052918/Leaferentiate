@@ -2,12 +2,23 @@
 
 An iOS leaf identification app build with SwiftUI. Credits to [Plant.id](https://plant.id) for the plant identification model.
 
+Views
+
+- ContentView: main display
+- PhotoLibraryView: presents a sheet on top of main display for selecting from the iOS photos library
+- CameraView: replaces the main display with the camera view
+
+Coordinator
+
+- Handles selected images, communicates with Plant.id API, and updates main display with identification results
+
 ## TODO
 
-- [ ] Consume Plant.id API.
+- [ ] Optimize result information display
 - [ ] Add animation to update identification result.
 - [ ] Add Unit tests.
 - [ ] Add UI tests.
+- [x] Connect to Plant.id plant identification API.
 
 ## About
 

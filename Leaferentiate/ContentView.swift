@@ -60,10 +60,6 @@ struct ContentView: View {
                 .padding(5)
                 
                 Spacer()
-                Text("A course project app for")
-                    .font(.footnote)
-                Text("SUSTech CS303 Artificial Intelligence")
-                    .font(.footnote)
             }
             .padding()
             .sheet(isPresented: $showPhotoLibraryView) {
